@@ -59,7 +59,7 @@ class AddEquipment extends Component {
         if (this.props.match.params.id) {
             const id = this.props.match.params.id
             try {
-                const data = await Axios.put(config.base_url + 'admin/api/equipment/update/' + id, equipment_name, {headers: {Authorization : 'Bearer '+token }})
+                await Axios.put(config.base_url + 'admin/api/equipment/update/' + id, equipment_name, {headers: {Authorization : 'Bearer '+token }})
                 this.setState({
                     equipmentName: ""
                 })
@@ -73,7 +73,7 @@ class AddEquipment extends Component {
             }
         } else {
             try {
-                const data = await Axios.post(config.base_url + 'admin/api/equipment/add', equipment_name, {headers: {Authorization : 'Bearer '+token }})
+                await Axios.post(config.base_url + 'admin/api/equipment/add', equipment_name, {headers: {Authorization : 'Bearer '+token }})
                 this.setState({
                     equipmentName: ""
                 })

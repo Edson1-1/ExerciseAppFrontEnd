@@ -45,6 +45,13 @@ export default class Equipment extends Component {
             })
         } catch (err) {
             console.log(err)
+            if(err.response){
+                this.setState({
+                    errorMessage: err.response.data+''
+                })
+            }else{
+                this.setState({errorMessage: err})
+            }
         }}
     }
 
@@ -54,7 +61,7 @@ export default class Equipment extends Component {
         })
         const token = localStorage.getItem('token')
         try {
-            const data = await Axios.delete(config.base_url + 'admin/api/equipment/delete/' + id, {headers: {Authorization: 'Bearer ' + token}})
+            await Axios.delete(config.base_url + 'admin/api/equipment/delete/' + id, {headers: {Authorization: 'Bearer ' + token}})
             this.setState({
                 equipments: this.state.equipments.filter(equipment => equipment.id !== id),
             })
