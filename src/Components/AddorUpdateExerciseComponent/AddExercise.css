@@ -1,0 +1,27 @@
+.add-exercise-container{
+    margin: 10px;
+}
+.add-exercise-form-container{
+    margin-top: 30px;
+
+    width: 450px;
+    max-width: 100%;
+}
+.green-text{
+    opacity: 30%;
+    color: green;
+}
+.blue-text{
+    opacity: 30%;
+    color: rgb(0, 0, 131);
+}
+.select-button{
+    opacity: 30%;
+    margin-left: 5px;
+    color: rgb(165, 0, 0);
+}
+.select-button:hover{
+    opacity: 100%;
+    cursor: pointer;
+    color: rgb(96, 182, 221);
+}

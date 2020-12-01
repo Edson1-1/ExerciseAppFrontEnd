@@ -1,0 +1,30 @@
+.login-container{
+    padding: 2em;
+    width: 35em;
+    max-width: 100%;
+    
+}
+
+.title-h1{
+    margin-bottom: 1em;
+}
+
+.error-login{
+    color:red;
+    font-size: 1em;
+    margin: 0;
+}
+.signup-link {
+    font-size: 1em;
+    margin: 0;
+}
+
+.login-container-after{
+    padding: 2em;
+    width: 100%;
+    
+}
+
+.regLink:hover {
+    text-decoration: none;
+}

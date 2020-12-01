@@ -1,0 +1,15 @@
+.add-equipment-container{
+    margin: 10px;
+
+}
+
+.equipment-form-container{
+    margin-top: 30px;
+
+    width: 450px;
+    max-width: 100%;
+}
+.error-message{
+    color: red;
+    margin-left: 5px;
+}

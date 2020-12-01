@@ -1,0 +1,26 @@
+.exercise-container{
+    padding: 0px
+}
+.exercise-header{
+    padding: 5px;
+}
+.add-exercise-button{
+    margin-left: 5px;
+    margin-bottom: 10px;
+
+}
+
+.table-body{
+    text-align: center;
+}
+.table-text-color{
+    color: rgb(23, 24, 32);
+}
+.link-button{
+    margin-left: 5px;
+}
+.button-margin{
+    width: 60px;
+    height: 34px;
+    margin-left: 2px ;
+}

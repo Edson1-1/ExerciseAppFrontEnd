@@ -1,0 +1,26 @@
+.register-container{
+    padding: 2em;
+    width: 35em;
+    max-width: 100%;
+}
+
+.title-h1{
+    margin-bottom: 1em;
+}
+
+.error-register{
+    color:red;
+    font-size: 1em;
+    padding-top: .5rem;
+    margin: 0;
+}
+.success{
+    color: green;
+    padding-top: 1em;
+
+}
+.register-container-after{
+    padding: 2em;
+    width: 100%;
+    
+}

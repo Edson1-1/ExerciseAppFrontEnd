@@ -1,0 +1,7 @@
+.navLinks{
+    color: white;
+}
+
+.navLinks:hover{
+    color: grey;
+}
