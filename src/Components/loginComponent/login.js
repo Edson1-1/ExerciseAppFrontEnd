@@ -67,6 +67,7 @@ export default class Login extends Component{
             console.log(data.data.message)
             if(data.data.token){
                 localStorage.setItem('token', data.data.token)
+                localStorage.setItem('role', this.state.roleValue)
             }else{
                 throw new Error("Authentication failed")
             }
@@ -74,8 +75,8 @@ export default class Login extends Component{
             this.setState({
                 name: "",
                 password: "",
-            }); 
-             history.push('/');
+            });
+            history.push('/')
         }catch(err) {
             console.log("Error is"+ err);
             const error = err.response.data+'';
@@ -150,8 +151,6 @@ export default class Login extends Component{
                             <input className = "btn btn-primary" type = "submit" value="Login" onSubmit = {this.onSubmit} />
                         </div>
                         </form>
-                        {/* <div>
-                        </div> */}
                         <div>
                            <span className = "error-login">{this.state.error} </span>
                            <p className="signup-link">Don't have an account?  <Link className = "regLink" to = '/register'> Sign up here!</Link></p>
