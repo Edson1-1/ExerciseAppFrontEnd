@@ -19,3 +19,12 @@
 .link-button{
     margin-left: 5px;
 }
+.search-exercise-searchBox{
+    margin-left: 5px;
+    width: 200px;
+    max-width: 100%;
+}
+
+.search-exercise-searchButton{
+    margin-left: 5px;
+}

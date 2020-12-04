@@ -24,3 +24,12 @@
     height: 34px;
     margin-left: 2px ;
 }
+.search-customer-searchBox{
+    margin-left: 5px;
+    width: 200px;
+    max-width: 100%;
+}
+
+.search-customer-searchButton{
+    margin-left: 5px;
+}

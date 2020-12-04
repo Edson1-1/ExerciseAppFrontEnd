@@ -1,7 +1,6 @@
 import Axios from 'axios'
 import React, { Component,useState,useEffect } from 'react'
 import config from '../../config'
-import { Link } from 'react-router-dom'
 import './user.css'
 
 
@@ -11,7 +10,11 @@ import './user.css'
 const RenderCustomer = (props) => {
     const [trainer, setTrainer] = useState('hi');
     useEffect( () => {
+        let ignore = false
+        if(!ignore){
         (props.trainers.length !== 0 )? setTrainer(props.trainers[0].username) : setTrainer('');
+}
+        return ( ) => ignore = true
     }, [props])
 
     const onChangeTrainer = (e) => {
@@ -56,10 +59,13 @@ export default class User extends Component {
         this.state = {
             customers: [],
             trainers: [],
-            errorMessage: ''
+            errorMessage: '',
+            searchKey: '',
         }
         // this.onDelete = this.onDelete.bind(this)
         this.assignTrainer = this.assignTrainer.bind(this)
+        this.onSearchKeyChange = this.onSearchKeyChange.bind(this)
+        this.onSearch = this.onSearch.bind(this)
 
     }
 
@@ -123,11 +129,58 @@ export default class User extends Component {
         }))
     }
 
+    onSearchKeyChange(e){
+        this.setState({
+            searchKey: e.target.value
+        })
+    }
+    
+    async onSearch(e){
+        e.preventDefault()
+        this.setState({errorMessage: ''})
+        const token = localStorage.getItem('token')
+        const search = {name: this.state.searchKey}
+        try{
+            if(this.state.searchKey ===''){
+                const data = await Axios.get(config.base_url + 'admin/api/user/customers', {headers: {Authorization: 'Bearer ' + token}})
+            this.setState({
+                customers: data.data
+            })
+            }else{
+                const data = await Axios.post(config.base_url + 'search/api/searchcustomer', search, {headers: {Authorization: 'Bearer ' + token}} )
+                this.setState({
+                    customers: data.data,
+                    searchKey: ''
+                })
+            }
+
+        }catch(err){
+            console.log(err)
+            if (err.response) {
+                this.setState({
+                    errorMessage: err.response.data + ''
+                })
+            } else {
+                this.setState({
+                    errorMessage: err
+                })
+            }
+        }
+
+    }
+
     render() {
         return (
             <div className = "exercise-container">
                 <h1 className = "exercise-header">Customers</h1>
                 <p className = 'error-message'>{this.state.errorMessage}</p>
+                <form onSubmit = {this.onSearch}>
+                    <div className = 'form-group'>
+                        <input className = "search-customer-searchBox" type='text' placeholder='Search' value = {this.state.searchKey} onChange = {this.onSearchKeyChange} />
+                        <input type='submit' value = "Search" className = "btn btn-success btn-sm search-customer-searchButton" onSubmit = {this.onSearch}/>
+
+                    </div>
+                </form>
                 <div className = 'table-div'>
                     <table className='table table-body'>
                         <thead>

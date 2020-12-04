@@ -31,25 +31,28 @@ export default class Exercise extends Component {
         super(props)
         this.state = {
             exercises: [],
-            errorMessage: ''
+            errorMessage: '',
+            searchKey: ''
         }
         this.onDelete = this.onDelete.bind(this)
+        this.onChangeSearchKey = this.onChangeSearchKey.bind(this)
+        this.onSubmit = this.onSubmit.bind(this)
     }
 
     async componentDidMount() {
         const token = localStorage.getItem('token')
         try {
-            const data = await Axios.get(config.base_url + 'admin/api/exercise/', {headers: {Authorization: 'Bearer ' + token}})
+            const data = await Axios.get(config.base_url + 'admin/api/exercise/', { headers: { Authorization: 'Bearer ' + token } })
             this.setState({
                 exercises: data.data
             })
         } catch (err) {
             console.log(err)
-            if(err.response){
+            if (err.response) {
                 this.setState({
-                    errorMessage: err.response.data+''
+                    errorMessage: err.response.data + ''
                 })
-            }else{
+            } else {
                 this.setState({
                     errorMessage: err
                 })
@@ -59,19 +62,20 @@ export default class Exercise extends Component {
 
     async onDelete(id) {
         const token = localStorage.getItem('token')
+        this.setState({ errorMessage: '' })
         try {
-            const data = await Axios.delete(config.base_url + 'admin/api/exercise/delete/' + id, {headers: {Authorization: 'Bearer ' + token}})
+            const data = await Axios.delete(config.base_url + 'admin/api/exercise/delete/' + id, { headers: { Authorization: 'Bearer ' + token } })
             console.log(data.data)
             this.setState({
                 exercises: this.state.exercises.filter(exercise => exercise.id !== id),
             })
         } catch (err) {
             console.log(err)
-            if(err.response){
+            if (err.response) {
                 this.setState({
-                    errorMessage: err.response.data+''
+                    errorMessage: err.response.data + ''
                 })
-            }else{
+            } else {
                 this.setState({
                     errorMessage: err
                 })
@@ -85,16 +89,60 @@ export default class Exercise extends Component {
         }))
     }
 
+    onChangeSearchKey(e) {
+        this.setState({
+            searchKey: e.target.value
+        })
+    }
+
+    async onSubmit(e) {
+        e.preventDefault()
+        this.setState({ errorMessage: '' })
+        const token = localStorage.getItem('token')
+        const search = { name: this.state.searchKey }
+        try {
+            if (this.state.searchKey === '') {
+                const data = await Axios.get(config.base_url + 'admin/api/exercise/', { headers: { Authorization: 'Bearer ' + token } })
+                this.setState({
+                    exercises: data.data
+                })
+            }else{
+            const data = await Axios.post(config.base_url + 'search/api/getexercise', search, { headers: { Authorization: 'Bearer ' + token } })
+            this.setState({
+                exercises: data.data,
+                searchKey: ''
+            })}
+        } catch (err) {
+            console.log(err)
+            if (err.response) {
+                this.setState({
+                    errorMessage: err.response.data + ''
+                })
+            } else {
+                this.setState({
+                    errorMessage: err
+                })
+            }
+
+        }
+    }
+
     render() {
         return (
-            <div className = "exercise-container">
-                <h1 className = "exercise-header">Exercises</h1>
-                <Link to ='/exercise/add' className = "btn btn-success add-exercise-button"> Add Exercise</Link>
-                <p className = 'error-message'>{this.state.errorMessage}</p>
-                <div className = 'table-div'>
+            <div className="exercise-container">
+                <h1 className="exercise-header">Exercises</h1>
+                <Link to='/exercise/add' className="btn btn-success add-exercise-button"> Add Exercise</Link>
+                <p className='error-message'>{this.state.errorMessage}</p>
+                <form onSubmit={this.onSubmit}>
+                    <div className='form-group'>
+                        <input className='search-exercise-searchBox' type="text" placeholder='Search' value={this.state.searchKey} onChange={this.onChangeSearchKey} />
+                        <input type="submit" value="Search" className="btn btn-success btn-sm search-exercise-searchButton " onSubmit={this.onSubmit} />
+                    </div>
+                </form>
+                <div className='table-div'>
                     <table className='table table-body'>
                         <thead>
-                            <tr className = 'table-text-color'>
+                            <tr className='table-text-color'>
                                 <th scope="col">Sl.No</th>
                                 <th scope="col">Exercise</th>
                                 <th scope="col">Type</th>
@@ -102,7 +150,7 @@ export default class Exercise extends Component {
                                 <th scope="col">Options</th>
                             </tr>
                         </thead>
-                        <tbody className = "table-text-color">
+                        <tbody className="table-text-color">
                             {this.exerciseList()}
                         </tbody>
                     </table>
