@@ -1,0 +1,33 @@
+.header-user{
+    text-align: center;
+    margin-top: 5px;
+    margin-left: 10px;
+
+}
+.header-user h1{
+    font-weight: 300;
+
+    font-size: 60px;
+}
+
+.header-user h3{
+    font-weight: 300;
+    color: rgb(221, 32, 32);
+}
+.header-user h5{
+    margin-top: 20px;
+    font-weight: 300;
+    font-size: 15px;
+    color: rgb(50, 75, 97);
+}
+.search-client-searchBox{
+    margin-left: 5px;
+    width: 150px;
+    max-width: 100%;
+}
+
+.search-client-searchButton{
+    margin-left: 5px;
+    width: 89px;
+    max-width: 100%;
+}
