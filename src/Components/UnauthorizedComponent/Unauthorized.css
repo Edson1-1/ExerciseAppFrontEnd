@@ -1,0 +1,22 @@
+
+.error-page-child{
+    text-align: center;
+}
+.sad-face{
+    margin-top: 10px;
+}
+.error-page-child h1{
+    color: rgb(55, 60, 77);
+    font-size: 150px;
+    font-weight: lighter;
+    margin: 0%;
+}
+.error-page-child h2{
+    color: rgb(55, 60, 77);
+    font-weight: 400;
+}
+.error-page-child P{
+    color: rgb(55, 60, 77);
+    font-weight: 400;
+}
+
