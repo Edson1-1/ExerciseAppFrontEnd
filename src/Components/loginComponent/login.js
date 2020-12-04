@@ -68,6 +68,8 @@ export default class Login extends Component{
             if(data.data.token){
                 localStorage.setItem('token', data.data.token)
                 localStorage.setItem('role', this.state.roleValue)
+                // localStorage.setItem('role', 'customer')
+
             }else{
                 throw new Error("Authentication failed")
             }
@@ -76,7 +78,12 @@ export default class Login extends Component{
                 name: "",
                 password: "",
             });
-            history.push('/')
+            if(this.state.roleValue === 'admin' || this.state.roleValue === 'trainer'){
+                history.push('/')}
+                else if( this.state.roleValue === 'customer'){ 
+                    history.push('/client')
+                }
+
         }catch(err) {
             console.log("Error is"+ err);
             const error = err.response.data+'';

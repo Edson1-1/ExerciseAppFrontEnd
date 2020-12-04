@@ -7,6 +7,12 @@ import './main.css'
 
 export default class Main extends Component {
 
+    componentDidMount(){
+        if(localStorage.getItem('role') === 'customer'){
+            this.props.history.push('/client')
+        }
+    }
+
 
 render(){
     return(

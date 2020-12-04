@@ -90,7 +90,11 @@ export default class Register extends Component {
                     email: "",
                     password: ""
                 });
-                history.push('/')
+                if(this.state.roleValue === 'admin' || this.state.roleValue === 'trainer'){
+                history.push('/')}
+                else if( this.state.roleValue === 'customer'){ 
+                    history.push('/client')
+                }
             })
             .catch(err => {
                 console.log(err)
