@@ -21,7 +21,7 @@ export default class Navbar extends Component{
                 </nav>
             </div>
         )}else{
-
+            if(this.props.role === 'admin'){
             return (
                 <div>
                     <nav className = "navbar navbar-dark bg-dark navbar-expand-lg">
@@ -31,11 +31,30 @@ export default class Navbar extends Component{
                         <Link to ='/equipment' className = "navbar-nav nav-link navLinks">Equipments</Link>
                         <Link to ='/customer' className = "navbar-nav nav-link navLinks">Customers</Link>
                         </div>
-                        <button onClick = {this.props.onLogOut} className = "btn btn-warning">Logout</button>
+                        <button onClick = {this.props.onLogOut} className = "btn btn-warning btn-sm">Logout</button>
 
     
                     </nav>
                 </div>
-            )}
+            )}else{
+                return (
+                    <div>
+                    <nav className = "navbar navbar-dark bg-dark navbar-expand-lg">
+                        <Link to ='/client' className = "navbar-brand">Home</Link>
+                        <div className = 'navbar-collapse navLinks'>
+                        <Link to ='/client/logexercise' className = "navbar-nav nav-link navLinks">Log Exercise</Link>
+                        </div>
+                        <button onClick = {this.props.onLogOut} className = "btn btn-warning btn-sm">Logout</button>
+
+    
+                    </nav>
+                </div>
+
+                )
+
+
+            }
+        
+        }
     }
 }
